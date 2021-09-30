@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     java
@@ -43,6 +44,7 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation("org.springframework.boot:spring-boot-starter-validation")
+        implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.flywaydb:flyway-core")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -67,6 +69,9 @@ subprojects {
 
 project(":common") {
     dependencies {}
+
+    tasks.getByName<Jar>("jar") { enabled = true }
+    tasks.getByName<BootJar>("bootJar") { enabled = false }
 }
 
 project(":api") {
